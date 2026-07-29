@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>焼き鳥 りく | 岐阜県瑞穂市の本格炭火焼き鳥</title>
+    <meta name="description" content="岐阜県瑞穂市にある「焼き鳥 りく」。こだわりの備長炭で焼き上げる本格焼き鳥と、アットホームな空間で至福のひとときをお過ごしください。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#8E1C1C', // 炭火・焼き鳥のタレをイメージした赤
+                            black: '#2C2C2C', // 墨黒
+                            bg: '#FDFBF7', // 和紙のような温かい白
+                            gray: '#7A7A7A'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif JP"', 'serif'],
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* カスタムスタイルとアニメーション */
+        body {
+            background-color: #FDFBF7;
+            color: #2C2C2C;
+            scroll-behavior: smooth;
+        }
+
+        /* ファーストビュースライダー */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #000;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 6s linear;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.05);
+        }
+        .slide.active {
+            opacity: 0.6; /* テキストを目立たせるため暗く */
+            transform: scale(1);
+        }
+
+        /* スクロールフェードインエフェクト */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 縦書きテキスト（キャッチコピー用） */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- ① ヘッダー -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="header">
+        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-serif font-bold text-white tracking-widest drop-shadow-md" id="logo">
+                焼き鳥 りく
+            </a>
+            
+            <!-- PC向けナビゲーション -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#about" class="text-white font-medium hover:text-brand-red transition drop-shadow-md">店舗紹介</a>
+                <a href="#menu" class="text-white font-medium hover:text-brand-red transition drop-shadow-md">人気メニュー</a>
+                <a href="#reason" class="text-white font-medium hover:text-brand-red transition drop-shadow-md">選ばれる理由</a>
+                <a href="#access" class="text-white font-medium hover:text-brand-red transition drop-shadow-md">アクセス</a>
+                <a href="#reservation" class="bg-brand-red text-white px-5 py-2 rounded-full font-bold hover:bg-red-800 transition shadow-lg">ご予約</a>
+            </nav>
+
+            <!-- スマホ向けハンバーガーメニュー -->
+            <button class="md:hidden text-white text-2xl focus:outline-none drop-shadow-md" id="mobile-menu-btn" aria-label="メニューを開く">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- スマホ向けメニュー展開 -->
+        <div class="fixed top-0 right-0 w-64 h-full bg-brand-black text-white transform translate-x-full transition-transform duration-300 z-50 flex flex-col p-8" id="mobile-menu">
+            <button class="self-end text-2xl mb-8" id="close-menu-btn" aria-label="メニューを閉じる">
+                <i class="fas fa-times"></i>
+            </button>
+            <nav class="flex flex-col space-y-6 text-lg font-serif">
+                <a href="#about" class="mobile-link hover:text-brand-red">店舗紹介</a>
+                <a href="#menu" class="mobile-link hover:text-brand-red">人気メニュー</a>
+                <a href="#reason" class="mobile-link hover:text-brand-red">選ばれる理由</a>
+                <a href="#access" class="mobile-link hover:text-brand-red">アクセス</a>
+                <a href="#reservation" class="mobile-link text-brand-red font-bold">ご予約</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ② ファーストビュー -->
+    <section class="hero-slider relative flex items-center justify-center">
+        <!-- スライド画像（ダミー画像名指定） -->
+        <div class="slide active" style="background-image: url('photo_food.jpg');" role="img" aria-label="美味しそうな焼き鳥の画像"></div>
+        <div class="slide" style="background-image: url('photo_interior.jpg');" role="img" aria-label="温かみのある店内の画像"></div>
+        <div class="slide" style="background-image: url('photo_exterior.jpg');" role="img" aria-label="焼き鳥りくの外観画像"></div>
+
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+
+        <div class="relative z-10 text-center text-white px-4">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold leading-snug md:leading-tight drop-shadow-xl mb-6">
+                炭火が奏でる、<br>至福のひととき。
+            </h1>
+            <p class="text-lg md:text-xl font-medium tracking-widest drop-shadow-md">
+                瑞穂の夜は、「りく」で決まり。
+            </p>
+        </div>
+
+        <!-- スクロール誘導 -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce z-10">
+            <span class="text-white text-sm tracking-widest mb-2 font-serif">SCROLL</span>
+            <i class="fas fa-chevron-down text-white text-xl"></i>
+        </div>
+    </section>
+
+    <!-- Instagramセクション -->
+    <section class="bg-brand-red py-4 text-center">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-4">
+            <p class="text-white font-medium"><i class="fab fa-instagram mr-2"></i>📸 最新情報はInstagramで発信しています</p>
+            <a href="https://instagram.com/yakitori_riku_mizuho_dummy" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-brand-red px-6 py-2 rounded-full font-bold text-sm hover:bg-gray-100 transition shadow-md">
+                Instagramを見る
+            </a>
+        </div>
+    </section>
+
+    <!-- ③ 店舗紹介 -->
+    <section id="about" class="py-20 md:py-32 overflow-hidden">
+        <div class="container mx-auto px-4 md:px-8 max-w-5xl">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2 fade-up">
+                    <img src="photo_about.jpg" alt="焼き鳥を焼く大将の姿" class="w-full h-auto rounded-lg shadow-2xl">
+                </div>
+                <div class="w-full md:w-1/2 fade-up">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-black mb-6">
+                        <span class="block text-brand-red text-lg mb-2 tracking-widest">ABOUT US</span>
+                        地域に愛される、<br>心温まる焼き鳥処
+                    </h2>
+                    <div class="text-gray-700 leading-relaxed space-y-4 text-justify">
+                        <p>
+                            岐阜県瑞穂市に店を構える「焼き鳥 りく」は、地域の方々に愛されるアットホームな居酒屋です。扉を開けると広がる香ばしい炭火の香りと、どこか懐かしくホッと落ち着く和の空間がお客様をお迎えいたします。
+                        </p>
+                        <p>
+                            一本一本、その日の状態を見極めて丁寧に串打ちし、備長炭の強火で一気に焼き上げる焼き鳥は、外はパリッと香ばしく、噛めば肉汁が溢れるジューシーな仕上がり。多くのお客様から「何度でも食べたくなる」と嬉しいお言葉をいただいております。
+                        </p>
+                        <p>
+                            ご家族での賑やかな団欒から、お仕事帰りの癒しの一杯、ご友人との楽しいひとときまで。価格もリーズナブルに抑え、誰もが気軽に立ち寄れるお店づくりを心掛けています。「りく」で心ゆくまでお寛ぎください。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ④ 人気メニュー -->
+    <section id="menu" class="py-20 bg-white">
+        <div class="container mx-auto px-4 md:px-8 max-w-6xl">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-black">
+                    <span class="block text-brand-red text-lg mb-2 tracking-widest">POPULAR MENU</span>
+                    りくの人気メニュー
+                </h2>
+                <p class="text-gray-600 mt-4">こだわりの素材と焼き加減。まずはこれをご賞味ください。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- メニュー1 -->
+                <div class="fade-up group">
+                    <div class="overflow-hidden rounded-t-lg">
+                        <img src="photo_menu1.jpg" alt="国産鶏のねぎま塩焼き" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="bg-brand-bg p-6 rounded-b-lg shadow-md border-t-4 border-brand-red">
+                        <h3 class="text-xl font-serif font-bold mb-2">名物 国産鶏のねぎま</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            大ぶりな国産鶏もも肉と、甘みの強いネギを交互に。備長炭の香りを纏わせ、絶妙な塩加減で引き出された旨味はビールとの相性抜群です。
+                        </p>
+                    </div>
+                </div>
+                <!-- メニュー2 -->
+                <div class="fade-up group delay-100">
+                    <div class="overflow-hidden rounded-t-lg">
+                        <img src="photo_menu2.jpg" alt="自家製 ふわふわ月見つくね" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="bg-brand-bg p-6 rounded-b-lg shadow-md border-t-4 border-brand-red">
+                        <h3 class="text-xl font-serif font-bold mb-2">自家製 ふわふわ月見つくね</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            軟骨のコリコリとした食感がアクセント。秘伝の甘辛いタレをたっぷりと絡め、濃厚な卵黄にダイブさせてお召し上がりください。
+                        </p>
+                    </div>
+                </div>
+                <!-- メニュー3 -->
+                <div class="fade-up group delay-200">
+                    <div class="overflow-hidden rounded-t-lg">
+                        <img src="photo_menu3.jpg" alt="新鮮 ごま油香る白レバー" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="bg-brand-bg p-6 rounded-b-lg shadow-md border-t-4 border-brand-red">
+                        <h3 class="text-xl font-serif font-bold mb-2">とろける 絶品白レバー</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            新鮮だからこそ提供できる、臭みのないクリーミーなレバー。ごま油と塩でシンプルに。口の中でとろける食感はリピーター続出の一品です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⑤ 選ばれる理由 -->
+    <section id="reason" class="py-20 bg-brand-black text-white">
+        <div class="container mx-auto px-4 md:px-8 max-w-6xl">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold">
+                    <span class="block text-brand-red text-lg mb-2 tracking-widest">REASONS</span>
+                    「りく」が選ばれる3つの理由
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div class="fade-up">
+                    <div class="w-24 h-24 mx-auto bg-brand-red rounded-full flex items-center justify-center text-4xl mb-6 shadow-lg shadow-red-900/50">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4">備長炭で焼き上げる本格派</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        遠赤外線効果の高い備長炭を使用。熟練の火入れ技術で、表面はパリッと香ばしく、中は肉汁を閉じ込めてふっくらと焼き上げます。
+                    </p>
+                </div>
+                <div class="fade-up delay-100">
+                    <div class="w-24 h-24 mx-auto bg-brand-red rounded-full flex items-center justify-center text-4xl mb-6 shadow-lg shadow-red-900/50">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4">誰もがくつろげる空間</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        大将の温かい人柄と活気あふれる店内。お一人様でも居心地の良いカウンター席や、ご家族でくつろげるお座敷をご用意しております。
+                    </p>
+                </div>
+                <div class="fade-up delay-200">
+                    <div class="w-24 h-24 mx-auto bg-brand-red rounded-full flex items-center justify-center text-4xl mb-6 shadow-lg shadow-red-900/50">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4">圧倒的なコストパフォーマンス</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        「美味しいものを、お腹いっぱい食べてほしい」。そんな想いから、高品質なお肉をリーズナブルな価格でご提供し続けています。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⑥ ギャラリー -->
+    <section class="py-20">
+        <div class="container mx-auto px-4 md:px-8 max-w-6xl">
+             <div class="text-center mb-12 fade-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-black">
+                    <span class="block text-brand-red text-lg mb-2 tracking-widest">GALLERY</span>
+                    店内の雰囲気
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="fade-up overflow-hidden rounded-lg shadow-md">
+                    <img src="photo_gallery1.jpg" alt="臨場感あふれるカウンター席" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="fade-up delay-100 overflow-hidden rounded-lg shadow-md">
+                    <img src="photo_gallery2.jpg" alt="ゆったりくつろげるお座敷席" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="fade-up delay-200 overflow-hidden rounded-lg shadow-md">
+                    <img src="photo_gallery3.jpg" alt="豊富な種類のお酒とグラス" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⑦ お客様の声 -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 md:px-8 max-w-5xl">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-black">
+                    <span class="block text-brand-red text-lg mb-2 tracking-widest">REVIEWS</span>
+                    お客様の声
+                </h2>
+            </div>
+            <div class="space-y-8">
+                <!-- 口コミ要約1 -->
+                <div class="bg-brand-bg p-8 rounded-lg shadow-sm border border-gray-100 fade-up relative">
+                    <i class="fas fa-quote-left text-4xl text-brand-red opacity-20 absolute top-4 left-4"></i>
+                    <div class="flex items-center mb-4 pl-8">
+                        <div class="text-yellow-400 text-lg mr-2">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-500 text-sm">30代 男性 / ご友人との来店</span>
+                    </div>
+                    <p class="text-gray-700 font-medium pl-8">
+                        一つひとつの串が大きく、食べ応えが抜群です。特にレバーとつくねは絶品で、炭の香りが食欲をそそります。価格も良心的で、ついつい頼みすぎてしまうほど大満足でした。
+                    </p>
+                </div>
+                <!-- 口コミ要約2 -->
+                <div class="bg-brand-bg p-8 rounded-lg shadow-sm border border-gray-100 fade-up relative">
+                    <i class="fas fa-quote-left text-4xl text-brand-red opacity-20 absolute top-4 left-4"></i>
+                    <div class="flex items-center mb-4 pl-8">
+                        <div class="text-yellow-400 text-lg mr-2">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-500 text-sm">40代 女性 / ご家族での来店</span>
+                    </div>
+                    <p class="text-gray-700 font-medium pl-8">
+                        子連れでも快く迎えてくださり、座敷席でゆっくりと食事を楽しむことができました。大将やスタッフさんの接客がとても温かく、また家族で伺いたいと思える素敵なお店です。
+                    </p>
+                </div>
+                <!-- 口コミ要約3 -->
+                <div class="bg-brand-bg p-8 rounded-lg shadow-sm border border-gray-100 fade-up relative">
+                    <i class="fas fa-quote-left text-4xl text-brand-red opacity-20 absolute top-4 left-4"></i>
+                    <div class="flex items-center mb-4 pl-8">
+                        <div class="text-yellow-400 text-lg mr-2">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-500 text-sm">50代 男性 / お一人様での来店</span>
+                    </div>
+                    <p class="text-gray-700 font-medium pl-8">
+                        仕事帰りにふらっと立ち寄れるアットホームな雰囲気が気に入っています。焼き鳥の味はもちろん、お酒の品揃えも良く、カウンターで大将と話しながら飲む時間が最高の癒しです。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⑧ 店舗情報・アクセス & ⑨ ご予約 -->
+    <section id="access" class="py-20 bg-brand-bg">
+        <div class="container mx-auto px-4 md:px-8 max-w-6xl">
+            <div class="flex flex-col lg:flex-row gap-12 bg-white rounded-xl shadow-xl overflow-hidden">
+                
+                <!-- Googleマップ埋め込み（瑞穂市中心部のダミー） -->
+                <div class="w-full lg:w-1/2 min-h-[400px]">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13014.281691238914!2d136.68065465!3d35.39739565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6003afc023d8df09%3A0xc3b4352ff90e4f0!2z5bKQ6Zic55yM55Ge56mC5biC!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="焼き鳥りくのGoogleマップ"></iframe>
+                </div>
+
+                <!-- 店舗情報テキスト -->
+                <div class="w-full lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                    <h2 class="text-3xl font-serif font-bold text-brand-black mb-8 border-b-2 border-brand-red pb-4 inline-block">
+                        店舗情報・アクセス
+                    </h2>
+                    
+                    <dl class="space-y-4 text-gray-700 mb-10">
+                        <div class="flex border-b border-gray-200 pb-3">
+                            <dt class="w-24 font-bold">店舗名</dt>
+                            <dd>焼き鳥 りく</dd>
+                        </div>
+                        <div class="flex border-b border-gray-200 pb-3">
+                            <dt class="w-24 font-bold">住所</dt>
+                            <dd>〒501-0200<br>岐阜県瑞穂市〇〇町1-2-3</dd>
+                        </div>
+                        <div class="flex border-b border-gray-200 pb-3">
+                            <dt class="w-24 font-bold">営業時間</dt>
+                            <dd>17:00 ～ 23:00 (L.O. 22:30)</dd>
+                        </div>
+                        <div class="flex border-b border-gray-200 pb-3">
+                            <dt class="w-24 font-bold">定休日</dt>
+                            <dd>月曜日・第2火曜日</dd>
+                        </div>
+                        <div class="flex pb-3">
+                            <dt class="w-24 font-bold">駐車場</dt>
+                            <dd>あり（店舗前に専用駐車場 5台完備）</dd>
+                        </div>
+                    </dl>
+
+                    <!-- ご予約エリア -->
+                    <div id="reservation" class="bg-gray-50 p-6 rounded-lg text-center border border-gray-200">
+                        <h3 class="text-xl font-serif font-bold text-brand-black mb-2">ご予約・お問い合わせ</h3>
+                        <p class="text-sm text-gray-500 mb-4">週末は混み合いますので、事前のご予約をおすすめいたします。</p>
+                        <a href="tel:058-327-0000" class="inline-flex items-center justify-center w-full bg-brand-red text-white text-2xl font-bold py-4 rounded-full hover:bg-red-800 transition shadow-lg transform hover:scale-105">
+                            <i class="fas fa-phone-alt mr-3"></i> 058-327-0000
+                        </a>
+                        <p class="text-xs text-gray-400 mt-3">※スマホからはタップして発信できます</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⑩ フッター -->
+    <footer class="bg-brand-black text-white py-12 text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-serif font-bold tracking-widest mb-6">焼き鳥 りく</h2>
+            
+            <a href="https://instagram.com/yakitori_riku_mizuho_dummy" target="_blank" rel="noopener noreferrer" class="inline-block text-gray-400 hover:text-white text-3xl mb-8 transition">
+                <i class="fab fa-instagram"></i>
+                <span class="sr-only">Instagram</span>
+            </a>
+            
+            <p class="text-sm text-gray-500">
+                &copy; 2026 Yakitori Riku. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. ヘッダーのスクロール時の背景色変更
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-brand-black', 'shadow-md');
+                } else {
+                    header.classList.remove('bg-brand-black', 'shadow-md');
+                }
+            });
+
+            // 2. モバイルメニューの開閉
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            const toggleMenu = () => {
+                mobileMenu.classList.toggle('translate-x-full');
+            };
+
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+            closeMenuBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+            // 3. ファーストビューの画像スライダー (クロスフェード)
+            const slides = document.querySelectorAll('.hero-slider .slide');
+            let currentSlide = 0;
+
+            const nextSlide = () => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            };
+            // 5秒ごとにスライド切り替え
+            setInterval(nextSlide, 5000);
+
+            // 4. スクロールアニメーション (Intersection Observer)
+            const fadeUpElements = document.querySelectorAll('.fade-up');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // 一度発火したら監視を解除
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeUpElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
